@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ pageTitle }}</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+		<a href="/" style="text-decoration: none; color: inherit; margin-right: auto!important;"><h5 class="my-0 mr-md-auto font-weight-normal">DBMS Project</h5></a>
+		<nav class="my-2 my-md-0 mr-md-3">
+			<a class="p-2 text-dark" href="/gardenerLogin">Gardener Services</a>
+		</nav>
+		{{#if isAuthenticated}} 
+		<form action="/logout" method="POST">
+			<input type="hidden" name="_csrf" value="{{csrfToken}}" >
+			<button class="btn btn-outline-primary">Logout</button> 
+		</form>
+		{{else}}
+		<a class="btn btn-outline-primary" href="/login">Login</a>
+		{{/if}}
+	</div>
+
+    {{{ body }}}
+    <script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script>
+
+		{{!-- Gardener Details by area --}}
+
+		const dialogGD = document.querySelector('.dialogGD');
+		function gd(){
+			try{
+				const selects = dialogGD.querySelectorAll('select');
+				axios.get('http://localhost:3000/gardenerDetails', {
+					params: {
+						areaCode: selects[0].value
+					}
+				})
+				.then(function (response) {
+					console.log(response.data);
+
+		let tableBody = document.getElementById("gardernersDetailsBody"), newRow, newCell;
+		tableBody.innerHTML = "";
+
+		if(response.data.length == 0){
+			alert("No Gardener Found");
+		}else{
+
+		for (let i=1; i <= response.data.length; i++) {
+      
+
+            newRow = document.createElement("tr");
+            newRow.style.cursor = "pointer";
+
+            tableBody.appendChild(newRow);
+            employeeId = document.createElement("td");
+            name_emp = document.createElement("td");
+            phoneNo = document.createElement("td");
+
+    
+            employeeId.textContent = response.data[i-1].emp_id;
+            name_emp.textContent = response.data[i-1].name;
+            {{!-- names.classlist = "name"; --}}
+            phoneNo.textContent = response.data[i-1].phone;
+            {{!-- phone.classlist = "phone"; --}}
+
+            newRow.appendChild(employeeId);
+            newRow.appendChild(name_emp);
+            newRow.appendChild(phoneNo);
+
+        }}
+
+
+
+				})
+				.catch(function (error) {
+					console.log(error);
+				}); 
+			}
+			catch(err){
+				console.log(err);
+			}
+		}
+
+		{{!-- Gardeners Attendance --}}
+
+		const dialogGA = document.querySelector('.dialogGA');
+		function ga(){
+			try{
+				const inputs = dialogGA.querySelectorAll('input');
+				const select = dialogGA.querySelectorAll('select');
+				axios.get('http://localhost:3000/gardenerAttendance', {
+					params: {
+						emp_id: inputs[0].value,
+						month: select[0].value,
+						year: select[1].value,
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+					console.log(response.data[0].No_of_Days);
+					document.getElementById("gardenerAttendance").innerHTML = `${response.data[0].No_of_Days} Days`;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});   
+			}
+			catch(err){
+				console.log(err);
+			}
+
+		}
+
+		{{!-- Monthly Roster --}}
+		
+		const dialogMR = document.querySelector('.dialogMR');
+		function mr(){
+			try{
+				const select = dialogMR.querySelectorAll('select');
+				axios.get('http://localhost:3000/monthlyRoster', {
+					params: {
+						month: select[0].value,
+						year: select[1].value,
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+
+				let tableBody = document.getElementById("rosterDetailsBody"), newRow, newCell;
+				tableBody.innerHTML = "";
+
+				if(response.data.length == 0){
+					alert("No Data Found");
+				}else{
+
+				for (let i=1; i <= response.data.length; i++) {
+			
+
+					newRow = document.createElement("tr");
+					newRow.style.cursor = "pointer";
+
+					tableBody.appendChild(newRow);
+					dr_job_id = document.createElement("td");
+					date = document.createElement("td");
+					emp_id = document.createElement("td");
+					gardener_name = document.createElement("td");
+					phone = document.createElement("td");
+
+			
+					dr_job_id.textContent = response.data[i-1].dr_job_id;
+					date.textContent = response.data[i-1].date;
+					emp_id.textContent = response.data[i-1].emp_id;
+					gardener_name.textContent = response.data[i-1].name;
+					phone.textContent = response.data[i-1].phone;
+
+
+					newRow.appendChild(dr_job_id);
+					newRow.appendChild(date);
+					newRow.appendChild(emp_id);
+					newRow.appendChild(gardener_name);
+					newRow.appendChild(phone);
+
+				}}
+
+
+				})
+				.catch(function (error) {
+					console.log(error);
+				});   
+			}
+			catch(err){
+				console.log(err);
+			}
+		}
+
+		{{!-- Track request by Id --}}
+
+		const dialogTrackById = document.querySelector('.dialogTrackById');
+		function trackbyId(){
+			try{
+				const inputs = dialogTrackById.querySelectorAll('input');
+				axios.get('http://localhost:3000/trackRequestbyId', {
+					params: {
+						request_ID: inputs[0].value,
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+					if(response.data[0].status == 1){
+						document.getElementById("Grassreqstatus").innerHTML = `Completed`;
+					}else{
+						document.getElementById("Grassreqstatus").innerHTML = `Pending`;
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+				});   
+			}
+			catch(err){
+				console.log(err);
+			}
+		}
+
+		{{!-- Track by Status --}}
+
+		const dialogTrackByType = document.querySelector('.dialogTrackByType');
+		function trackbyStatus(){
+			try{
+				const selected = dialogTrackByType.querySelectorAll('select');
+				axios.get('http://localhost:3000/trackRequestbyStatus', {
+					params: {
+						Status: selected[0].value,
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+
+				let tableBody = document.getElementById("grassbystatusBody"), newRow, newCell;
+				tableBody.innerHTML = "";
+
+				if(response.data.length == 0){
+					alert("No Data Found");
+				}else{
+
+				for (let i=1; i <= response.data.length; i++) {
+			
+
+					newRow = document.createElement("tr");
+					newRow.style.cursor = "pointer";
+
+					tableBody.appendChild(newRow);
+					request_ID = document.createElement("td");
+					webmail = document.createElement("td");
+					reqAreaCode = document.createElement("td");
+
+
+			
+					request_ID.textContent = response.data[i-1].request_ID;
+					webmail.textContent = response.data[i-1].webmail;
+					reqAreaCode.textContent = response.data[i-1].reqAreaCode;
+
+					newRow.appendChild(request_ID);
+					newRow.appendChild(webmail);
+					newRow.appendChild(reqAreaCode);
+
+
+				}}
+
+				})
+				.catch(function (error) {
+					console.log(error);
+				});   
+			}
+			catch(err){
+				console.log(err);
+			}
+		}
+
+		{{!-- Track Equipment Status by Id --}}
+
+		const dialogEquipTrackById = document.querySelector('.dialogEquipTrackById');
+		function trackEquipbyId(){
+			try{
+				const inputs = dialogEquipTrackById.querySelectorAll('input');
+				console.log(inputs[0].value);
+				axios.get('http://localhost:3000/trackEquipRequestbyId', {
+					params: {
+						equip_id: inputs[0].value,
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+					let tableBody = document.getElementById("EquipstatusbyId"), newRow, newCell;
+				tableBody.innerHTML = "";
+
+				if(response.data.length == 0){
+					alert("No Data Found");
+				}else{
+
+				for (let i=1; i <= response.data.length; i++) {
+			
+
+					newRow = document.createElement("tr");
+					newRow.style.cursor = "pointer";
+
+					tableBody.appendChild(newRow);
+					equip_id = document.createElement("td");
+					name_equip = document.createElement("td");
+					equip_status = document.createElement("td");
+
+
+			
+					equip_id.textContent = response.data[i-1].equip_id;
+					name_equip.textContent = response.data[i-1].name;
+
+					if(response.data[0].status == 1){
+						equip_status.textContent = `Available to Use`;
+					}else{
+						equip_status.textContent = `Being Repaired`;
+					}
+
+					newRow.appendChild(equip_id);
+					newRow.appendChild(name_equip);
+					newRow.appendChild(equip_status);
+
+
+				}}
+					
+				})
+				.catch(function (error) {
+					console.log(error);
+				});   
+			}
+			catch(err){
+				console.log(err);
+			}
+		}
+
+		{{!-- Track Equipment by Status --}}
+
+		const dialogTrackEquipByType = document.querySelector('.dialogTrackEquipByType');
+		function trackEquipbyStatus(){
+			try{
+				const selected = dialogTrackEquipByType.querySelectorAll('select');
+				axios.get('http://localhost:3000/trackEquipbyStatus', {
+					params: {
+						Status: selected[0].value,
+					}
+				})
+				.then(function (response) {
+					console.log(response);
+					let tableBody = document.getElementById("Equipstatusbystatus"), newRow, newCell;
+				tableBody.innerHTML = "";
+
+				if(response.data.length == 0){
+					alert("No Data Found");
+				}else{
+
+				for (let i=1; i <= response.data.length; i++) {
+			
+
+					newRow = document.createElement("tr");
+					newRow.style.cursor = "pointer";
+
+					tableBody.appendChild(newRow);
+					equip_id = document.createElement("td");
+					name_equip = document.createElement("td");
+
+
+			
+					equip_id.textContent = response.data[i-1].Equip_id;
+					name_equip.textContent = response.data[i-1].Name;
+
+					newRow.appendChild(equip_id);
+					newRow.appendChild(name_equip);
+
+
+				}}
+				})
+				.catch(function (error) {
+					console.log(error);
+				});   
+			}
+			catch(err){
+				console.log(err);
+			}
+		}
+
+	
+	function gardenerLogin(){
+		window.location.href = "/gardener";
+		alert("Login Successful !!!");
+	}
+
+	function viewgRoster(){
+		try{
+
+				axios.get('http://localhost:3000/gardenerRoster')
+				.then(function (response) {
+					console.log(response);
+				let tableBody = document.getElementById("gardernersRosterDetailsBody"), newRow, newCell;
+				tableBody.innerHTML = "";
+
+				if(response.data.length == 0){
+					alert("No Data Found");
+				}else{
+
+				for (let i=1; i <= response.data.length; i++) {
+			
+
+					newRow = document.createElement("tr");
+					newRow.style.cursor = "pointer";
+
+					tableBody.appendChild(newRow);
+					date = document.createElement("td");
+					shiftstarttime = document.createElement("td");
+					shiftendtime = document.createElement("td");
+
+					date.textContent = response.data[i-1].date;
+					shiftstarttime.textContent = response.data[i-1].shiftstarttime;
+					shiftendtime.textContent = response.data[i-1].shiftendtime;
+
+					newRow.appendChild(date);
+					newRow.appendChild(shiftstarttime);
+					newRow.appendChild(shiftendtime);
+
+
+				}}
+					
+				})
+				.catch(function (error) {
+					console.log(error);
+				});   
+			}
+			catch(err){
+				console.log(err);
+			}
+	}
+
+	function UpdategRoster(){
+
+		alert("Data updated Successfully !!");
+
+			{{!-- try{
+				const inputs = dialogGD.querySelectorAll('input');
+				axios.get('http://localhost:3000/gardenerDetails', {
+					params: {
+						areaCode: selects[0].value
+					}
+				})
+				.then(function (response) {
+					console.log(response.data);
+
+				})
+				.catch(function (error) {
+					console.log(error);
+				}); 
+			}
+			catch(err){
+				console.log(err);
+			} --}}
+
+	}
+
+	function sendReq(){
+		alert("Request Sent Successfully !!!");
+	}
+
+	</script>
+</body>
+</html>

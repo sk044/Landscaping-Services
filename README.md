@@ -4,7 +4,8 @@
 
 1. ```NodeJs```
 2. ```NPM```
-3. ```MySQL```
+3. ```MySQL``` 
+(Having `Xampp` will be useful)
 
 ### Quick start
 

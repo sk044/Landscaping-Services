@@ -1,0 +1,135 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  
+      <h1 class="display-4" style="font-size: 38px;">Gardener Home</h1>
+      
+
+</div>
+
+<br>
+      <br>
+      <div class="gardenerProfile">
+        <div class="profile-card">
+        <div class="infos">
+            <div class="img-border">
+            <img src="https://cdn-icons-png.flaticon.com/512/1983/1983305.png"  alt="gardener's face">
+            </div>  
+            <h1 class="name">Amit</h1>
+            <h3 class="specialty">Gardener</h3>
+            <div class="social-media">
+            </div>
+            <div>
+                <h4 style="color: rgb(223, 221, 221);">+91 8847505900</h4>
+            </div>
+            <div>
+                <span><button class="contact-me-btn">Update Profile</button></span>
+                <span><button class="contact-me-btn">Update Password</button></span>
+                <span><button class="contact-me-btn">Ask for Leave</button></span>
+            </div>
+
+            
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+            <span class="stat-name">Area Code</span>
+            <span class="stat-num">A116</span>
+            
+            </div>
+
+            <div class="stat">
+                <span class="stat-name">Assignment Duration</span> 
+                <span class="stat-num" style="font-size: 16px;">06/07/2020-05/11/2020</span>              
+            </div>
+            
+            <div class="stat">
+                <span class="stat-name">Area</span>  
+                <span class="stat-num">Hospital</span>
+                
+            </div>
+            
+        </div>
+        <br>
+
+        </div>
+      </div>
+
+        <div class="container">
+
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Update Roster</h4>
+          </div>
+          <div class="card-body">
+
+              <form class="main-form">
+              <div class="row dialogRosterUpdate">
+                <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Date</label>
+                          <input class="form-control" placeholder="" type="date" >
+                      </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Start Time</label>
+                          <input class="form-control" placeholder="" type="time" >
+                      </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >End Time</label>
+                          <input class="form-control" placeholder="" type="time" >
+                      </div>
+
+
+
+                    </div>
+                </div>
+              </div>
+
+          </form>
+
+          <br>
+
+            <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="UpdategRoster()">Update</button>
+          </div>
+          
+        </div>
+
+        <br>
+
+
+
+
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">View Roster</h4>
+          </div>
+          <div class="card-body">
+            <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="viewgRoster()">Go</button>
+
+            <br>
+
+            <table id="gardenersRosterDetails">
+                    <thead>
+                      <th>Date</th>
+                      <th>Shift Start Time</th>
+                      <th>Shift End Time</th>
+                    </thead>
+                    <tbody id="gardernersRosterDetailsBody">
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+
+                    </tbody>
+                    
+                  </table>
+
+          </div>
+          
+
+        </div>
+</div>
+
+   

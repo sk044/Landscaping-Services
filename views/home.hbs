@@ -1,0 +1,475 @@
+{{#if isAuthenticated}} 
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  
+      <h1 class="display-4" style="font-size: 38px;">LANDSCAPING SERVICES</h1>
+      <br>
+    </div>
+
+    <div class="container">
+      <div>
+          <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Request Grass Cutting</h4>
+          </div>
+          <div class="card-body">
+
+              <form class="main-form">
+              <div class="row dialogRosterUpdate">
+                <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Area:</label>
+                          <select class="form-control" name="area" id="area">
+                            <option value="A101">APJ Abdul Kalam Boys' Hostel</option>
+                            <option value="A102">Football Ground</option>
+                            <option value="A103">Fruits and Vegetable Shop</option>
+                            <option value="A104">Girls' Hostel</option>
+                            <option value="A105">Mechanical Workshop</option>
+                            <option value="A106">Structural Engineering Lab</option>
+                            <option value="A107">Tutorial Block</option>
+                            <option value="A108">India Post Office</option>
+                            <option value="A109">Gymkhana</option>
+                            <option value="A110">Bus Stop Boys' Hostel</option>
+                            <option value="A111">CV Raman Hostel</option>
+                            <option value="A112">Cricket Ground</option>
+                            <option value="A113">B1 Residential Complex</option>
+                            <option value="A114">Children's Park</option>
+                            <option value="A115">Kendriya Vidyalaya</option>
+                            <option value="A116">Hospital</option>
+                            <option value="A117">Admin Block</option>
+                          </select>
+                      </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Webmail</label>
+                          <input class="form-control" placeholder="" type="text" >
+                      </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Date of Request</label>
+                          <input class="form-control" placeholder="" type="date" >
+                      </div>
+
+
+
+                    </div>
+                </div>
+              </div>
+
+          </form>
+
+          <br>
+
+            <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="sendReq()">Send Request</button>
+          </div>
+          
+        </div>
+
+        <br>
+
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Gardener Details</h4>
+          </div>
+          <div class="card-body">
+            <form class="main-form">
+              <div class="row dialogGD">
+                  <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Area:</label>
+                          <select class="form-control" name="area" id="area">
+                            <option value="A101">APJ Abdul Kalam Boys' Hostel</option>
+                            <option value="A102">Football Ground</option>
+                            <option value="A103">Fruits and Vegetable Shop</option>
+                            <option value="A104">Girls' Hostel</option>
+                            <option value="A105">Mechanical Workshop</option>
+                            <option value="A106">Structural Engineering Lab</option>
+                            <option value="A107">Tutorial Block</option>
+                            <option value="A108">India Post Office</option>
+                            <option value="A109">Gymkhana</option>
+                            <option value="A110">Bus Stop Boys' Hostel</option>
+                            <option value="A111">CV Raman Hostel</option>
+                            <option value="A112">Cricket Ground</option>
+                            <option value="A113">B1 Residential Complex</option>
+                            <option value="A114">Children's Park</option>
+                            <option value="A115">Kendriya Vidyalaya</option>
+                            <option value="A116">Hospital</option>
+                            <option value="A117">Admin Block</option>
+                          </select>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            <br>
+            </form>
+            <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="gd()">Go</button>
+          </div>
+          
+          <div >
+              <ul>
+                  
+                  <table id="gardenersDetails">
+                    <thead>
+                      <th>Employee ID</th>
+                      <th>Name</th>
+                      <th>Phone No.</th>
+                    </thead>
+                    <tbody id="gardernersDetailsBody">
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+
+                    </tbody>
+                    
+                  </table>
+
+              </ul>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Gardeners Attendance</h4>
+          </div>
+          <div class="card-body">
+            <form class="main-form">
+              <div class="row dialogGA">
+                <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Employee Id</label>
+                          <input class="form-control" placeholder="" type="text" >
+                      </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label for="months" >Month</label>
+                          <select class="form-control" name="months" id="months">
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                          </select>
+                      </div>
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label for="years" > Year</label>
+                          <select class="form-control" name="years" id="years">
+                            <option value="2020">2020</option>
+                          </select>
+                      </div>
+
+                    </div>
+                </div>
+              </div>
+
+          </form>
+
+          <br>
+          <br>
+
+            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="ga()">Go</button>
+
+            <br>
+
+            <div style="text-align: left;padding-left: 20px;">
+                <ul style="font-size: 14px;font-weight: bold;">
+                  <li>Attendance :<span class="g1" style="color: black; font-size: 16px;" id="gardenerAttendance">NA</span></li>
+                </ul>
+            </div>
+
+          </div>
+        </div>
+
+              <br>
+
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Monthly Roster</h4>
+          </div>
+          <div class="card-body">
+            <form class="main-form">
+              <div class="row dialogMR">
+                <div class="col-md-9">
+                    <div class="row">
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label for="months" >Month</label>
+                          <select class="form-control" name="months" id="months">
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                          </select>
+                      </div>
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label for="years" > Year</label>
+                          <select class="form-control" name="years" id="years">
+                            <option value="2020">2020</option>
+                          </select>
+                      </div>
+
+                    </div>
+                </div>
+              </div>
+
+          </form>
+
+          <br>
+          <br>
+
+            <button type="button" class="btn btn-lg btn-block btn-primary" onclick="mr()">Go</button>
+
+          <br>
+
+            <div style="text-align: left;padding-left: 20px;">
+                <ul style="font-size: 14px;font-weight: bold;">
+                  <table id="rosterDetails">
+                    <thead>
+                      <th>Job ID</th>
+                      <th>Date</th>
+                      <th>Employee Id</th>
+                      <th>Employee Name</th>
+                      <th>Employee Phone No.</th>
+                    </thead>
+                    <tbody id="rosterDetailsBody">
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+
+                    </tbody>
+                    
+                  </table>
+                </ul>
+            </div>
+
+          </div>
+        </div>
+
+       <br>
+
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Track Grass Cutting</h4>
+          </div>
+          <div class="card-body">
+            <form class="main-form">
+              <div class="row dialogTrackById">
+                <div class="col-md-9">
+                    <div class="row">
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Request Id</label>
+                          <input class="form-control" placeholder="" type="text" >
+                      </div>
+
+
+                    </div>
+
+                    <br>
+
+                       <button type="button" class="btn btn-lg btn-block btn-primary" onclick="trackbyId()">Track</button>
+                </div>
+              </div>
+          </form>
+
+          <br>
+
+           <div style="text-align: left;padding-left: 20px;">
+                <ul style="font-size: 14px;font-weight: bold;">
+                  <li>Status :<span class="g1" style="color: black; font-size: 16px;"  id="Grassreqstatus">NA</span></li>
+                </ul>
+            </div>
+
+          <br>
+          <p style="text-align: center;">OR</p>
+          <hr>
+          <br>
+
+          <form class="main-form">
+              <div class="row dialogTrackByType">
+                <div class="col-md-9">
+                    <div class="row">
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="months" >Track by Status</label>
+                          <select class="form-control" name="months" id="months">
+                            <option value="0">Pending</option>
+                            <option value="1">Completed</option>
+                          </select>
+                      </div>
+
+
+                    </div>
+
+                    <br>
+
+                       <button type="button" class="btn btn-lg btn-block btn-primary" onclick="trackbyStatus()">Track</button>
+                </div>
+              </div>
+          </form>
+          <br>
+          <table id="grassbystatus">
+              <thead>
+                <th>Request ID</th>
+                <th>Webmail</th>
+                <th>Area</th>
+
+              </thead>
+              <tbody id="grassbystatusBody">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+
+              </tbody>
+              
+            </table>
+
+          <br>
+
+          </div>
+        </div> 
+
+
+             <br>
+
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Track Equipment Repairing Status</h4>
+          </div>
+          <div class="card-body">
+            <form class="main-form">
+              <div class="row dialogEquipTrackById">
+                <div class="col-md-9">
+                    <div class="row">
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                          <label >Equipment Id</label>
+                          <input class="form-control" placeholder="" type="text" >
+                      </div>
+
+
+                    </div>
+
+                    <br>
+
+                       <button type="button" class="btn btn-lg btn-block btn-primary" onclick="trackEquipbyId()">Track</button>
+                </div>
+              </div>
+          </form>
+          <br>
+           <table id="equibyid">
+              <thead>
+                <th>Equipment ID</th>
+                <th>Equipment Name</th>
+                <th>Status</th>
+
+              </thead>
+              <tbody id="EquipstatusbyId">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+
+              </tbody>
+              
+            </table>
+          <br>
+          <p style="text-align: center;">OR</p>
+          <hr>
+          <br>
+
+          <form class="main-form">
+              <div class="row dialogTrackEquipByType">
+                <div class="col-md-9">
+                    <div class="row">
+
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                         <label for="months" >Track by Status</label>
+                          <select class="form-control" name="months" id="months">
+                            <option value="1">Available</option>
+                            <option value="0">Repairing</option>
+                          </select>
+                      </div>
+
+
+                    </div>
+
+                    <br>
+
+                       <button type="button" class="btn btn-lg btn-block btn-primary" onclick="trackEquipbyStatus()">Track</button>
+                </div>
+              </div>
+          </form>
+          
+
+          <br>
+           <table id="equibystatus">
+              <thead>
+                <th>Equipment ID</th>
+                <th>Equipment Name</th>
+
+              </thead>
+              <tbody id="Equipstatusbystatus">
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+
+              </tbody>
+              
+            </table>
+
+          </div>
+        </div> 
+
+
+      </div>
+
+      {{else}}
+      <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center" style="height: 550px;">
+         <h1 class="display-4" style="font-size: 38px;">Please Login to Use the Services</h1>
+         <br>
+          <br>
+           <br>
+        <span><a class="btn btn-outline-primary" href="/login">Admin Login </a></span>
+        <span><a class="btn btn-outline-primary" href="/gardenerLogin">Gardener Login </a></span>
+      </div>
+      
+
+      {{/if}}
+      <footer class="pt-4 my-md-5 pt-md-5 border-top">
+       <div id="contact" class="footer">
+            <div class="container">
+               <div class="row pdn-top-30">
+
+                  <div>
+                     <div class="Follow">
+                        <h4>CONTACT ME</h4>
+                        <ul>
+                           <li>Name: Abhay Patil </li>
+                           <li>Roll No.: 1901CS01</li>
+                           <li>Email Id: abhay_1901cs01@iitp.ac.in</li>
+
+                        </ul>
+                        <br>
+                      
+                     </div>
+                  </div>
+                
+
+               </div>
+
+            </div>
+         </div>
+      </footer>
+    </div>
